@@ -22,13 +22,29 @@ class App extends Component {
       imageUrl: "",
       route: "signin",
       isSignedIn: false,
+      user: {
+        id: "",
+        name: "",
+        email: "",
+
+        entries: 0,
+        joined: new Date(),
+      },
     };
   }
-  componentDidMount() {
-    fetch("http://localhost:3001")
-      .then((response) => response.json())
-      .then(console.log);
-  }
+  loadUser = (data) => {
+    this.setState({
+      user: {
+        id: data.id,
+        name: data.name,
+        email: data.email,
+
+        entries: data.entries,
+        joined: data.joined,
+      },
+    });
+  };
+
   OnInputChange = (event) => {
     this.setState({ input: event.target.value });
   };
